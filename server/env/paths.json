@@ -1,0 +1,6 @@
+{
+  "default": {
+    "PUBLIC_DIR": "public",
+    "PHOTO_DIR": "public/uploaded/photos"
+  }
+}

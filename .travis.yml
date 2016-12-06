@@ -1,0 +1,21 @@
+language: node_js
+node_js:
+- '6'
+addons:
+  firefox: "43.0"
+before_install:
+- echo "registry = https://realglobe.artifactoryonline.com/realglobe/api/npm/npm-virtual" > $HOME/.npmrc
+- curl -u${NPM_USER}:${NPM_PASSWORD} "https://realglobe.artifactoryonline.com/realglobe/api/npm/auth" >> $HOME/.npmrc
+- cat $HOME/.npmrc
+- export DISPLAY=:99.0
+- sh -e /etc/init.d/xvfb start
+- npm install -g mocha
+install:
+- npm install
+- (cd server; npm install)
+script:
+- ./ci/build.js
+- npm run compile
+- npm test
+env:
+  secure: "Tmt5vojBGK4fQdFjT7ljJ+XNKyxj7sbhv01aa5omb+0Exf/oWz2IX261sSK4w9QrGRQtkW8zZqpdaa3KTEZwxtxO/Kzg9eDjUeUZjWNDITym5oMo7tTFwjIJ9u4I5pvQfTIJc3zfjfVmtoFqaTK1HZei1DF8ZKh3JUf/QlPIt7RjQb6ZfqhbUF90MimItPAmkaCqfqOYnb6sk9M5d/hAzqNWqnmiK5+xdt3qVM/VF4IBbsqIiER6PIMEJvLe0ZBEHodAVDGNGFzv/EJjRQmBdIV9GPKokUe2N8PdDm8fy6BFjpjkoT79U5C+2XAJrOvalnlTOiGvgcgTE83PTd9R0U6/gPXUinm0vjROt47L2ykRgjEP3IbUhzFbZGbvsRlUYOBtWAE2+k60zT6TX0STF8vTS2Ler+hri58uRQ3gYQmV71VFFIW+eSvlhkEQCylEOD1J240d65xmQxrdseRJ4xA+/1DB0TO9Ubnultb1F64qYCX6s7AAWozLW+AQ6RBEn9QK/aUxfcMnGVMNXj2T2lIPdqwKqr89of+c1YxBje6SqIEGAsErXfQhKdmuyDbulnNKiJ2OtFVUhszXol98eh/XndFxIgMGwrB295vgZpzQcM49R0AQPVu7FLxwt3sn0Td6CXiiy+gSLiB9tPfyu2GuGTFyKnIyPoo0iry7N8c="
