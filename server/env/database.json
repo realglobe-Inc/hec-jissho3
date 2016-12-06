@@ -1,7 +1,7 @@
 {
   "default": {
     "DIALECT": "mysql",
-    "DATABASE": "hec-jissho2",
+    "DATABASE": "hec-jissho3",
     "ROOT_USER": "root",
     "ROOT_PASSWORD": "a25kYWRhZ3dlZWF0YXRhbGd",
     "PORT": 3307,
@@ -10,9 +10,9 @@
   },
   "test": {
     "DIALECT": "sqlite",
-    "DATABASE": "hec-jissho2",
-    "USERNAME": "hec-jissho2",
-    "PASSWORD": "hec-jissho2",
+    "DATABASE": "hec-jissho3",
+    "USERNAME": "hec-jissho3",
+    "PASSWORD": "hec-jissho3",
     "STORAGE": "tmp/test_database.db"
   },
   "production": {

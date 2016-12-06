@@ -7,7 +7,7 @@ const { SUGOS_URL } = CONSTS
 const camera = require('@self/server/env/camera.json').default
 const { apiKey: googleMapApiKey } = config
 let { protocol, host } = window.location
-const ORIGIN_URL = `${protocol}//${host}/jissho2`
+const ORIGIN_URL = `${protocol}//${host}/jissho3`
 
 export default {
   protocol () {
@@ -50,7 +50,7 @@ export default {
     return {
       protocol,
       host,
-      path: '/jissho2' + SUGOS_URL.UI_PATH
+      path: '/jissho3' + SUGOS_URL.UI_PATH
     }
   },
   /**

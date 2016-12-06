@@ -1,3 +1,3 @@
-# hec-jissho2
+# hec-jissho3
 
 このディレクトリが Dockerize のターゲットになる。

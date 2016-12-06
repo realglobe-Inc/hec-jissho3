@@ -1,5 +1,5 @@
 {
-  "app-color": "#C5584A",
+  "app-color": "#524E2C",
   "app-dark-color": "darken($app-color,15%)",
   "border-color": "$app-dark-color",
   "header-height": "50px",

@@ -20,7 +20,7 @@ const asleep = require('asleep')
 const colorprint = require('colorprint')
 const arequest = require('arequest')
 
-const baseUrl = `${PROTOCOL}://${HOST}/jissho2`
+const baseUrl = `${PROTOCOL}://${HOST}/jissho3`
 let request = arequest.create({ jar: true })
 let create = (pathname, config) => co(function * () {
   let { statusCode, body } = yield request(Object.assign({

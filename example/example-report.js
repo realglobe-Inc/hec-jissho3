@@ -37,7 +37,7 @@ co(function * () {
     protocol: PROTOCOL,
     host: HOST,
     key: ACTOR_KEY,
-    path: '/jissho2/sugos/report/socket.io',
+    path: '/jissho3/sugos/report/socket.io',
     modules: { reporter }
   })
   yield actor.connect()
