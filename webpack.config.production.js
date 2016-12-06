@@ -32,14 +32,14 @@ const JsConfig = () => {
         'process.env.NODE_ENV': JSON.stringify(NODE_ENV),
         'process.env.RG_GOOGLE_API_KEY': JSON.stringify(process.env.RG_GOOGLE_API_KEY)
       }),
-      new ClosureCompilerPlugin({
-        compiler: {
-          language_in: 'ECMASCRIPT6',
-          language_out: 'ECMASCRIPT5',
-          compilation_level: 'SIMPLE'
-        },
-        concurrency: 3,
-      })
+      // new ClosureCompilerPlugin({
+      //   compiler: {
+      //     language_in: 'ECMASCRIPT6',
+      //     language_out: 'ECMASCRIPT5',
+      //     compilation_level: 'SIMPLE'
+      //   },
+      //   concurrency: 3,
+      // })
     ],
     module: {
       loaders: [

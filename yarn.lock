@@ -15,11 +15,7 @@
     "@types/react" "*"
     redux "^3.6.0"
 
-"@types/react@*":
-  version "0.14.46"
-  resolved "https://realglobe.artifactoryonline.com/realglobe/api/npm/npm-virtual/@types/react/-/react-0.14.46.tgz#565d2b8561a39a55ccbd6c90352c52ae75ed2862"
-
-"@types/react@^0.14.51":
+"@types/react@*", "@types/react@^0.14.51":
   version "0.14.53"
   resolved "https://realglobe.artifactoryonline.com/realglobe/api/npm/npm-virtual/@types/react/-/react-0.14.53.tgz#ac638d6cce8bf196bfda871e8e6162f593d43e36"
 
@@ -295,7 +291,7 @@ apeman-react-touchable@^5.1.4:
     co "^4.6.0"
     hammerjs "^2.0.8"
 
-apemanenv:
+apemanenv@^3.0.5:
   version "3.0.5"
   resolved "https://realglobe.artifactoryonline.com/realglobe/api/npm/npm-virtual/apemanenv/-/apemanenv-3.0.5.tgz#50a118af66f9b6d62b203ca8b4b64250ff63188e"
   dependencies:

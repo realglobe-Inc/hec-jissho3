@@ -25,17 +25,16 @@ let state = {
 }
 
 function createDataSyncActor () {
-  let dataObj = Object.assign({}, state)
   let syncer = new Module({
     fetch () {
       return co(function * () {
-        return dataObj
+        return state
       })
     },
     update ({key, nextValue}) {
       const s = this
       return co(function * () {
-        dataObj[key] = nextValue
+        state[key] = nextValue
         debug(key, nextValue)
         s.emit(DATA_SYNC_ACTOR.UPDATE_EVENT, { key, nextValue })
       })
