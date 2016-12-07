@@ -63,6 +63,7 @@ export namespace Store {
     markers: Markers
     modalWindow: ModalWindow
     reportClosed: ReportClosed
+    reportShared: ReportShared
     reports: Reports
     selectedMarker: SelectedMarker
     callers: Callers,

@@ -7,6 +7,7 @@ import storeUtil from '../helpers/store_util'
 import appUtil from '../helpers/app_util'
 import { ApButton } from 'apeman-react-button'
 
+const { DATA_SYNC_ACTOR } = require('@self/server/lib/consts').SUGOS
 const debug = require('debug')('hec:AreaReport')
 
 interface ReportWatchProps {
@@ -65,6 +66,8 @@ interface Props {
   reports: Store.Reports
   selectedMarker: Store.SelectedMarker
   markers: Store.Markers
+  reportShared: Store.ReportShared
+  callers: Store.Callers
   dispatch: any
 }
 
@@ -124,9 +127,10 @@ class AreaReport extends React.Component<Props, State> {
         </div>
         <div className='info'>
           <div className='name'>
-            情報
+            共有
           </div>
           <div className='value'>
+            {s.renderSharedMessage()}
           </div>
         </div>
 
@@ -168,6 +172,20 @@ class AreaReport extends React.Component<Props, State> {
     }
   }
 
+  renderSharedMessage () {
+    const s = this
+    let { selectedMarker, markers, reports, reportShared } = s.props
+    if (!reportShared.shared) {
+      return null
+    }
+    let marker = markers.get(selectedMarker.id)
+    let report = reports.get(marker.keys.reportFullId)
+    let isShared = report.reportFullId === reportShared.report.reportFullId
+    if (isShared) {
+      return '共有されています'
+    }
+  }
+
   /**
    * 通報クローズの確認画面
    */
@@ -180,12 +198,17 @@ class AreaReport extends React.Component<Props, State> {
    */
   shareReport () {
     const s = this
-    let {markers, reports, selectedMarker} = s.props
+    let {markers, reports, selectedMarker, callers} = s.props
     let marker = markers.get(selectedMarker.id)
     let report = reports.get(marker.keys.reportFullId)
-
-    // middleware で共有してくれる
-    s.props.dispatch(actions.reportShared.setSharedReport(report))
+    let caller = callers.get(DATA_SYNC_ACTOR.KEY)
+    let syncer = caller.get(DATA_SYNC_ACTOR.MODULE)
+    syncer.update({
+      key: 'sharedReport',
+      nextValue: report
+    }).then(() => {
+      window.alert('通報を共有しました。')
+    })
   }
 
   updateAdress (reportFullId, location) {
@@ -208,7 +231,9 @@ export default connect(
   (state: Store.State) => ({
     selectedMarker: state.selectedMarker,
     reports: state.reports,
-    markers: state.markers
+    markers: state.markers,
+    callers: state.callers,
+    reportShared: state.reportShared
   }),
   (dispatch) => ({ dispatch })
 )(AreaReport)

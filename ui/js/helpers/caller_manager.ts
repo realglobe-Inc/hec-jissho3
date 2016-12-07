@@ -152,6 +152,12 @@ function initializeDataSyncer (key: string, caller: Caller) {
           store.dispatch(actions.reportClosed.setClosedReport(report))
           return
         }
+      case 'sharedReport':
+        {
+          let report: Report = nextValue
+          store.dispatch(actions.reportShared.setSharedReport(report))
+          return
+        }
       case 'sharedPhoto':
         return
       default:
