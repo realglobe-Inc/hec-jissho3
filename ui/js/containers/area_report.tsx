@@ -132,8 +132,20 @@ class AreaReport extends React.Component<Props, State> {
           </div>
         </div>
 
-        {s.renderShareButton()}
-        {s.renderCloseButton()}
+        <div className='bottom-buttons'>
+          <ApButton
+            primary wide style={{border: '0 solid'}}
+            onTap={s.shareReport.bind(s)}
+            >
+            共有する
+          </ApButton>
+          <ApButton
+            primary wide danger style={{border: '0 solid'}}
+            onTap={s.showConfirmWindow.bind(s)}
+            >
+          　クローズする
+          </ApButton>
+        </div>
       </div>
     )
   }
@@ -156,32 +168,6 @@ class AreaReport extends React.Component<Props, State> {
     if (reportFullId !== nextReportFullId) {
       s.updateAdress(nextReportFullId, nextMarker.location)
     }
-  }
-
-  renderShareButton () {
-    return (
-      <div className='share-report'>
-        <ApButton
-          primary wide style={{border: '0 solid'}}
-          onTap={this.shareReport.bind(this)}
-          >
-          共有する
-        </ApButton>
-      </div>
-    )
-  }
-
-  renderCloseButton () {
-    return (
-      <div className='close-report'>
-        <ApButton
-          primary wide danger style={{border: '0 solid'}}
-          onTap={this.showConfirmWindow.bind(this)}
-          >
-        　クローズする
-        </ApButton>
-      </div>
-    )
   }
 
   /**

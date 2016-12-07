@@ -106,11 +106,11 @@ $panel-width: 400px;
   .content::-webkit-scrollbar {
     display: none;
   }
-  .close-report {
+  .bottom-buttons {
     width: 100%;
     text-align: center;
     position: absolute;
-    bottom: 60px;
+    bottom: 4em;
   }
 }
 
