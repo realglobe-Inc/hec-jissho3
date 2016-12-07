@@ -57,9 +57,9 @@ class ReportObserver {
       yield s.observer.stop()
       yield s.masterActor.disconnect()
       for (let key of Object.keys(s.callers)) {
-        let actor = s.callers[key]
+        let caller = s.callers[key]
         try {
-          yield actor.disconnect(key)
+          yield caller.disconnect(key)
         } catch (e) {
           console.error(e)
         }
@@ -90,7 +90,7 @@ class ReportObserver {
         if (!reporter) {
           throw new Error('Cannot get an hitoe module.')
         }
-        s.callers[actorKey] = actor
+        s.callers[actorKey] = caller
         // Add event listener
         // hitoe.on('warning', s._pushReportDb(actorKey)('warning'))
         reporter.on('emergency', s._pushReportDb({actorKey, event}).bind(s))
@@ -100,13 +100,13 @@ class ReportObserver {
       // 切断時
       // TODO ソケット切断後にタイムアウト切断
       if (event === 'actor:teardown') {
-        let actor = s.callers[actorKey]
-        if (!actor) {
+        let caller = s.callers[actorKey]
+        if (!caller) {
           return
         }
         delete s.callers[actorKey]
         try {
-          yield actor.disconnect(actorKey)
+          yield caller.disconnect(actorKey)
         } catch (e) {
           // エラーが出ても接続はちゃんと切れる
           console.error(e)

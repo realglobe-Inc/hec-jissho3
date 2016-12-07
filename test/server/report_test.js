@@ -15,10 +15,11 @@ const reportUrl = require('@self/server/helper/urls').report
 const sugoCaller = require('sugo-caller')
 const sugoActor = require('sugo-actor')
 const { Module } = sugoActor
+const { SUGOS, SUGOS_URL } = require('@self/server/lib/consts')
 const {
   REPORTER_MODULE,
   MASTER_ACTOR
-} = require('@self/server/lib/consts').SUGOS
+} = SUGOS
 
 describe('Report server', function () {
   let request = arequest.create({ jar: true })
@@ -31,10 +32,7 @@ describe('Report server', function () {
     yield db.seed()
     baseUrl = `http://localhost:${port.REPORT}`
     yield reportServer.listen(port.REPORT)
-    observer = reportServer.createObserver({
-      protocol: 'http',
-      host: `localhost:${port.REPORT}`
-    })
+    observer = reportServer.createObserver()
     yield observer.start()
   }))
 
@@ -59,17 +57,6 @@ describe('Report server', function () {
       assert.ok(body.length > 0)
       assert.equal(statusCode, 200)
       report_full_id = body[0].report_full_id
-    }
-    // Get report info
-    {
-      let url = `${baseUrl}${reportUrl.getReportInfo(report_full_id)}`
-      let { statusCode, body } = yield request({
-        url,
-        method: 'GET',
-        json: true
-      })
-      assert.equal(body.report_full_id, report_full_id)
-      assert.equal(statusCode, 200)
     }
     // Close report
     {
@@ -113,19 +100,22 @@ describe('Report server', function () {
         })
       }
     })
-    let actor = sugoActor({
+    let reportActor = sugoActor({
       port: port.REPORT,
       key: actorKey,
       modules: {
         reporter
-      }
+      },
+      path: SUGOS_URL.REPORT_PATH
     })
-    yield actor.connect()
+    yield reportActor.connect()
+    yield asleep(1000)
 
     // Connect master actor
     let caller = sugoCaller({
       protocol: 'http',
-      host: `localhost:${port.REPORT}`
+      host: `localhost:${port.REPORT}`,
+      path: SUGOS_URL.REPORT_PATH
     })
     let masterActor = yield caller.connect(MASTER_ACTOR.KEY)
     let masterReporter = masterActor.get(MASTER_ACTOR.MODULE)
@@ -134,7 +124,6 @@ describe('Report server', function () {
       gotReport = data
     })
     assert.ok(masterReporter)
-
     // Emit report
     yield asleep(1000)
     reporter.report()
@@ -146,17 +135,9 @@ describe('Report server', function () {
     })
     assert.ok(reports.find((report) => report.report_full_id === reportFullId))
 
-    let url = `${baseUrl}${reportUrl.getReportInfo(reportFullId)}`
-    let { body: reportInfo } = yield request({
-      url,
-      method: 'GET',
-      json: true
-    })
-    assert.equal(reportInfo.report_full_id, reportFullId)
-    assert.equal(gotReport.report_full_id, reportFullId)
-
-    yield masterActor.disconnect(MASTER_ACTOR.KEY)
-    yield actor.disconnect()
+    yield caller.disconnect(MASTER_ACTOR.KEY)
+    yield reportActor.disconnect()
+    yield asleep(200)
   }))
 })
 

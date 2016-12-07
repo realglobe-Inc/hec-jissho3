@@ -1,6 +1,8 @@
 const { port } = require('../env')
 const { SUGOS_URL } = require('./consts')
 
+let isTest = process.env.NODE_ENV === 'test'
+
 module.exports = {
   // Report Server の Master Actor の接続先
   ReportServer: {
@@ -8,7 +10,7 @@ module.exports = {
     masterActorConifg: {
       protocol: 'http',
       hostname: 'localhost',
-      port: port.UI,
+      port: isTest ? port.REPORT : port.UI,
       path: SUGOS_URL.UI_PATH
     },
     observerConfig: {
