@@ -35,6 +35,13 @@ export interface ReportClosedAction extends Action {
   report?: Report
 }
 
+// report shared
+export const SET_SHARED_REPORT: string = 'SET_SHARED_REPORT'
+export const CLEAR_SHARED_REPORT: string = 'CLEAR_SHARED_REPORT'
+export interface ReportSharedAction extends Action {
+  report?: Report
+}
+
 // reports
 export const SET_REPORTS: 'SET_REPORTS' = 'SET_REPORTS'
 export const ADD_REPORT: 'ADD_REPORT' = 'ADD_REPORT'

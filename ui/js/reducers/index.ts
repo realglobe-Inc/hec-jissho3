@@ -12,6 +12,7 @@ import modalWindow from './modal_window'
 import selectedMarker from './selected_marker'
 import reports from './reports'
 import reportClosed from './report_closed'
+import reportShared from './report_shared'
 import photos from './photos'
 
 const Reducer = combineReducers<Store.State>({
@@ -23,6 +24,7 @@ const Reducer = combineReducers<Store.State>({
   selectedMarker,
   reports,
   reportClosed,
+  reportShared,
   photos
 })
 

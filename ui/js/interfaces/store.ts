@@ -28,6 +28,11 @@ export namespace Store {
     closed: boolean
   }
 
+  export interface ReportShared {
+    report: App.Report
+    shared: boolean
+  }
+
   type reportFullId = string
   export type Reports = Im.Map<reportFullId, App.Report>
 
