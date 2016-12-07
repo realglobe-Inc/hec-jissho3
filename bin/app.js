@@ -12,6 +12,7 @@ function app () {
     // UI
     yield ui.listen(port.UI)
     yield ui.actor.connect()
+    yield ui.watchSharedPhoto()
     debug(`UI server listening on port ${port.UI}`)
 
     // Camera

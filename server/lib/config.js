@@ -4,6 +4,7 @@ const { SUGOS_URL } = require('./consts')
 module.exports = {
   // Report Server の Master Actor の接続先
   ReportServer: {
+    redisDb: 2,
     masterActorConifg: {
       protocol: 'http',
       hostname: 'localhost',
@@ -31,5 +32,8 @@ module.exports = {
       port: port.UI,
       path: SUGOS_URL.UI_PATH
     }
+  },
+  UiServer: {
+    redisDb: 1
   }
 }

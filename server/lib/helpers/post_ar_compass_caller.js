@@ -1,11 +1,12 @@
 /**
- * 共有された画像を AR-Compass server にポストする
- * dataSyncActor に対する Caller で、イベントを監視して画像共有イベントのときにポストする。
+ * 共有された画像や位置情報を AR-Compass server にポストする
+ * dataSyncActor に対する Caller で、イベントを監視する。
  */
 
 const sugoCaller = require('sugo-caller')
 const { SUGOS, SUGOS_URL } = require('../consts')
 const { port } = require('@self/env')
+const fs = require('fs')
 const debug = require('debug')('hec:postArCompassCaller')
 const co = require('co')
 const easyimg = require('easyimage') // Dependent on imagemagick
@@ -14,8 +15,8 @@ const { DATA_SYNC_ACTOR } = SUGOS
 const request = require('request')
 
 const AR_COMPASS_URL = `http://localhost:${port.AR_COMPASS}`
-const PUBLIC_DIR = join(__dirname, '../..')
-const OUTPUT_DIR = join(PUBLIC_DIR, 'tmp')
+const PROJECT_DIR = join(__dirname, '../..')
+const OUTPUT_DIR = join(PROJECT_DIR, 'tmp')
 const RESIZE_WIDTH = 200
 
 function watchSharedPhoto () {
@@ -29,8 +30,14 @@ function watchSharedPhoto () {
     let actor = yield caller.connect(DATA_SYNC_ACTOR.KEY)
     let syncer = actor.get(DATA_SYNC_ACTOR.MODULE)
     syncer.on(DATA_SYNC_ACTOR.UPDATE_EVENT, ({key, nextValue}) => {
-      if (key === 'sharedPhoto') {
-        resizeAndPost(nextValue)
+      switch (key) {
+        case 'sharedPhoto':
+          resizeAndPost(nextValue)
+          return
+        case 'sharedLocation':
+          postLocation(nextValue)
+        default:
+          return
       }
     })
     return caller
@@ -39,7 +46,7 @@ function watchSharedPhoto () {
 
 function resizeAndPost (photoInfo) {
   return co(function * () {
-    let photoPath = join(PUBLIC_DIR, photoInfo.image)
+    let photoPath = join(PROJECT_DIR, 'public', photoInfo.image)
     let resizedPath = join(OUTPUT_DIR, photoInfo.image)
     yield easyimg.resize({
       src: photoPath,
@@ -48,7 +55,7 @@ function resizeAndPost (photoInfo) {
     })
     yield new Promise((resolve, reject) => {
       request.post({
-        url: AR_COMPASS_URL,
+        url: AR_COMPASS_URL + '/ar-compass/image',
         formData: {
           img: fs.createReadStream(resizedPath)
         }
@@ -57,6 +64,18 @@ function resizeAndPost (photoInfo) {
       })
     })
     debug(`Posted ${photoInfo.image}`)
+  }).catch((err) => console.error(err))
+}
+
+function postLocation (location) {
+  return new Promise((resolve, reject) => {
+    request.post({
+      url: AR_COMPASS_URL + '/ar-compass/location',
+      json: true,
+      body: location
+    }, (err, res, body) => {
+      err ? reject(err) : resolve(body)
+    })
   }).catch((err) => console.error(err))
 }
 

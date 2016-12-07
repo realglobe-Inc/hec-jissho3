@@ -21,6 +21,10 @@ let state = {
   },
   reportClosed: {
     report: {}
+  },
+  sharedLocation: {
+    lat: 35.701562,
+    lng: 139.753148
   }
 }
 

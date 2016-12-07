@@ -6,6 +6,7 @@ const env = require('@self/env')
 const endpoints = require('./endpoints/report')
 const Observer = require('./helpers/report_observer')
 const { SUGOS_URL } = require('./consts')
+const { ReportServer } = require('./config')
 
 let isTest = process.env.NODE_ENV === 'test'
 let config = {
@@ -13,7 +14,7 @@ let config = {
   storage: isTest ? null : {
     redis: {
       url: env.redis.URL,
-      db: 1
+      db: ReportServer.redisDb
     }
   },
   socketIoOptions: {
