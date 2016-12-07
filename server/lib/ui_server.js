@@ -2,7 +2,7 @@
  * SUGO-Hub Server to manage UI
  */
 const sugoHub = require('sugo-hub')
-const env = require('@self/env')
+const env = require('@self/server/env')
 const { join } = require('path')
 const { SUGOS_URL } = require('./consts')
 const createDataSyncActor = require('./helpers/data_sync_actor')

@@ -3,7 +3,7 @@
  * UI でも使うので ES5 で書いた。
  */
 var encode = require('urlencode')
-var { REST_URL } = require('@self/lib/consts')
+var { REST_URL } = require('@self/server/lib/consts')
 var CAMERA_URL = REST_URL.OF_CAMERA
 var REPORT_URL = REST_URL.OF_REPORT
 

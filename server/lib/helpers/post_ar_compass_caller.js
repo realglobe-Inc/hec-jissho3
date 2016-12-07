@@ -5,7 +5,7 @@
 
 const sugoCaller = require('sugo-caller')
 const { SUGOS, SUGOS_URL } = require('../consts')
-const { port } = require('@self/env')
+const { port } = require('@self/server/env')
 const fs = require('fs')
 const debug = require('debug')('hec:postArCompassCaller')
 const co = require('co')

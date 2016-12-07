@@ -4,8 +4,7 @@
  */
 
 const co = require('co')
-// const uuid = require('uuid')
-const models = require('@self/db/models')
+const models = require('@self/server/db/models')
 const compose = require('sg-server/lib/compose')
 const schemaMW = require('../middlewares/schema_mw')
 const debug = require('debug')('hec:controller:report')

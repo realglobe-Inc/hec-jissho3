@@ -1,6 +1,6 @@
 const uuid = require('uuid')
-const generateToken = require('@self/helper/generate_token')
-const { camera } = require('@self/env')
+const generateToken = require('@self/server/helper/generate_token')
+const { camera } = require('@self/server/env')
 
 const model = 'Camera'
 

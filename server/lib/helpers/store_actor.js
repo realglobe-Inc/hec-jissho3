@@ -6,7 +6,7 @@ const sugoActor = require('sugo-actor')
 const { Module } = sugoActor
 const co = require('co')
 const { SUGOS, SUGOS_URL } = require('../consts')
-const { port } = require('@self/env')
+const { port } = require('@self/server/env')
 const debug = require('debug')('hec:store_actor')
 
 const { STORE_ACTOR } = SUGOS

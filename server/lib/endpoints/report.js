@@ -1,7 +1,7 @@
 /**
  * @module endpoints
  */
-const { REST_URL } = require('@self/lib/consts')
+const { REST_URL } = require('@self/server/lib/consts')
 const URL = REST_URL.OF_REPORT
 const controller = require('../controllers/report')
 

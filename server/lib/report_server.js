@@ -2,7 +2,7 @@
  * SUGO-Hub Server to manage reports
  */
 const sugoHub = require('sugo-hub')
-const env = require('@self/env')
+const env = require('@self/server/env')
 const endpoints = require('./endpoints/report')
 const Observer = require('./helpers/report_observer')
 const { SUGOS_URL } = require('./consts')

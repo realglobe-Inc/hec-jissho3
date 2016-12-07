@@ -1,7 +1,7 @@
 const sugoActor = require('sugo-actor')
 const { Module } = sugoActor
 const { cameraActorConfig } = require('../config').CameraServer
-const { Photo } = require('@self/db/models')
+const { Photo } = require('@self/server/db/models')
 const { PHOTO_MONITOR_ACTOR } = require('../consts').SUGOS
 const {
   KEY, MODULE, CREATED_EVENT, REMOVED_EVENT
