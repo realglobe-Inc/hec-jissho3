@@ -7,7 +7,6 @@ import storeUtil from '../helpers/store_util'
 import appUtil from '../helpers/app_util'
 import { ApButton } from 'apeman-react-button'
 
-const { DATA_SYNC_ACTOR } = require('@self/server/lib/consts').SUGOS
 const debug = require('debug')('hec:AreaReport')
 
 interface ReportWatchProps {
@@ -66,7 +65,6 @@ interface Props {
   reports: Store.Reports
   selectedMarker: Store.SelectedMarker
   markers: Store.Markers
-  callers: Store.Callers
   dispatch: any
 }
 
@@ -182,18 +180,12 @@ class AreaReport extends React.Component<Props, State> {
    */
   shareReport () {
     const s = this
-    let {markers, reports, callers, selectedMarker} = s.props
+    let {markers, reports, selectedMarker} = s.props
     let marker = markers.get(selectedMarker.id)
     let report = reports.get(marker.keys.reportFullId)
 
-    let caller = callers.get(DATA_SYNC_ACTOR.KEY)
-    let syncer = caller.get(DATA_SYNC_ACTOR.MODULE)
-    syncer.update({
-      key: 'sharedLocation',
-      nextValue: report.latestInfo.location
-    }).then(() => {
-      window.alert('通報を共有しました。')
-    })
+    // middleware で共有してくれる
+    s.props.dispatch(actions.reportShared.setSharedReport(report))
   }
 
   updateAdress (reportFullId, location) {
@@ -216,8 +208,7 @@ export default connect(
   (state: Store.State) => ({
     selectedMarker: state.selectedMarker,
     reports: state.reports,
-    markers: state.markers,
-    callers: state.callers
+    markers: state.markers
   }),
   (dispatch) => ({ dispatch })
 )(AreaReport)

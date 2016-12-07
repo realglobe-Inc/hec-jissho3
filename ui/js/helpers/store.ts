@@ -32,6 +32,22 @@ const syncRemoteMW = (store) => (next) => (action) => {
         })
         return
       }
+    case Actions.SET_SHARED_REPORT:
+      {
+        let state: Store.State = store.getState()
+        let {callers, markers, reports, selectedMarker} = state
+        let marker = markers.get(selectedMarker.id)
+        let report = reports.get(marker.keys.reportFullId)
+        let caller = callers.get(DATA_SYNC_ACTOR.KEY)
+        let syncer = caller.get(DATA_SYNC_ACTOR.MODULE)
+        syncer.update({
+          key: 'sharedReport',
+          nextValue: report
+        }).then(() => {
+          window.alert('通報を共有しました。')
+        })
+        return
+      }
     default:
   }
 }

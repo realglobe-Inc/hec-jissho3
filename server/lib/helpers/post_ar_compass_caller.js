@@ -34,7 +34,7 @@ function watchSharedPhoto () {
         case 'sharedPhoto':
           resizeAndPost(nextValue)
           return
-        case 'sharedLocation':
+        case 'sharedReport':
           postLocation(nextValue)
         default:
           return
@@ -63,17 +63,22 @@ function resizeAndPost (photoInfo) {
         err ? reject(err) : resolve()
       })
     })
-    debug(`Posted ${photoInfo.image}`)
+    debug('Posted image', photoInfo.image)
   }).catch((err) => console.error(err))
 }
 
-function postLocation (location) {
+function postLocation (report) {
   return new Promise((resolve, reject) => {
+    let { location } = report.latestInfo
+    if (!location) {
+      reject(new Error(`Invalid report ${report}`))
+    }
     request.post({
       url: AR_COMPASS_URL + '/ar-compass/location',
       json: true,
       body: location
     }, (err, res, body) => {
+      debug('Posted', location)
       err ? reject(err) : resolve(body)
     })
   }).catch((err) => console.error(err))
