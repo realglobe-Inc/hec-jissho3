@@ -13,6 +13,10 @@ let links = [
   {
     url: 'photos.html',
     text: '隊員用画面'
+  },
+  {
+    url: 'headmount.html',
+    text: 'ヘッドマウント情報画面'
   }
 ]
 

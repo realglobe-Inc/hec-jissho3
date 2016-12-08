@@ -23,16 +23,18 @@ const rootElement = document.getElementById('site')
 const LOCATION_URL = 'https://edac.online/ar-compass/location'
 const IMAGE_URL = 'https://edac.online/ar-compass/image'
 
-class SharedInfo extends React.Component<{}, { location?: Location }> {
+class SharedInfo extends React.Component<{}, { location?: Location, imageNoCache?: string }> {
   constructor () {
     super()
     this.state = {
       location: {
         lat: 0,
         lng: 0
-      }
+      },
+      imageNoCache: '?hoge'
     }
   }
+
   render () {
     const s = this
     return (
@@ -51,7 +53,7 @@ class SharedInfo extends React.Component<{}, { location?: Location }> {
           <div className='block'>
             <h2>画像</h2>
             <div>
-              <img src={IMAGE_URL} width={500}/>
+              <img src={IMAGE_URL + s.state.imageNoCache} width={500}/>
             </div>
           </div>
         </div>
@@ -63,6 +65,7 @@ class SharedInfo extends React.Component<{}, { location?: Location }> {
     const s = this
 
     s.updateLocation()
+    s.updateImage()
 
     sugoCaller(urls.uiCallers())
               .connect(DATA_SYNC_ACTOR.KEY)
@@ -78,6 +81,9 @@ class SharedInfo extends React.Component<{}, { location?: Location }> {
     syncer.on(DATA_SYNC_ACTOR.UPDATE_EVENT, ({key, nextValue}) => {
       switch (key) {
         case 'sharedPhoto':
+          debug('Update because event', key)
+          setTimeout(s.updateImage.bind(s), 1000)
+          return
         case 'sharedReport':
           debug('Update because event', key)
           setTimeout(s.updateLocation.bind(s), 1000)
@@ -97,6 +103,12 @@ class SharedInfo extends React.Component<{}, { location?: Location }> {
         return
       }
       this.setState({ location: body })
+    })
+  }
+
+  updateImage () {
+    this.setState({
+      imageNoCache: '?' + Math.random().toString(36).slice(-8)
     })
   }
 }
