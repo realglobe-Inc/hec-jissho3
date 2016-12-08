@@ -16,7 +16,7 @@ $panel-width: 400px;
   box-sizing: border-box;
   display: flex;
   flex-flow: column nowrap;
-  background-color: lighten($app-color, 55%);
+  background-color: white;
   border-right: 1px solid $border-color;
   border-left: 1px solid $border-color;
   z-index: 10;

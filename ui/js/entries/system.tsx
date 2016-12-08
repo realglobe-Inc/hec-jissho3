@@ -4,6 +4,7 @@ import { Provider } from 'react-redux'
 import store from '../helpers/store'
 import AppStyle from '../components/app_style'
 import Header from '../components/header'
+import OkShareWindow from '../containers/ok_share_window'
 import OkWarningWindow from '../containers/ok_warning_window'
 import ConfirmCloseReportWindow from '../containers/confirm_close_report_window'
 import MapController from '../components/map_controller'
@@ -26,6 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <Header/>
         <MapController/>
         <PhotoList />
+        <OkShareWindow/>
         <OkWarningWindow/>
         <ConfirmCloseReportWindow/>
         <ModalCenterconf/>

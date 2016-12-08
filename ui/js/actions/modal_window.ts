@@ -10,6 +10,14 @@ export const closeReportCloseModal = (): Action => ({
   type: Actions.CLOSE_REPORTCLOSE_MODAL
 })
 
+export const openOkSharingModal = (): Action => ({
+  type: Actions.OPEN_OKSHARING_MODAL
+})
+
+export const closeOkSharingModal = (): Action => ({
+  type: Actions.CLOSE_OKSHARING_MODAL
+})
+
 export const openOkWarningModal = (): Action => ({
   type: Actions.OPEN_OKWARNING_MODAL
 })

@@ -19,6 +19,7 @@ export namespace Store {
 
   export interface ModalWindow {
     reportClose: boolean
+    okSharing: boolean
     okWarning: boolean
     centerConf: boolean
   }

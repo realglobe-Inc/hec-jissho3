@@ -207,7 +207,7 @@ class AreaReport extends React.Component<Props, State> {
       key: 'sharedReport',
       nextValue: report
     }).then(() => {
-      window.alert('通報を共有しました。')
+      s.props.dispatch(actions.modalWindow.openOkSharingModal())
     })
   }
 
