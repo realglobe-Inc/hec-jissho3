@@ -1,6 +1,6 @@
 #!/usr/bin/env node
-const { port } = require('../env')
-const cameraServer = require('../lib/camera_server')
+const { port } = require('@self/server/env')
+const cameraServer = require('@self/server/lib/camera_server')
 const co = require('co')
 
 co(function * () {

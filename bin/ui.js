@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 const co = require('co')
-const { port } = require('../env')
-const uiServer = require('../lib/ui_server')
+const { port } = require('@self/server/env')
+const uiServer = require('@self/server/lib/ui_server')
 
 co(function * () {
   yield uiServer.listen(port.UI)
