@@ -87,11 +87,8 @@
     "karma": "^1.1.2",
     "karma-firefox-launcher": "^1.0.0",
     "karma-mocha": "^1.1.1",
-    "koa": "^1.2.4",
-    "koa-proxy": "^0.6.0",
     "mocha": "^3.0.0",
     "node-sass-json-importer": "^2.1.1",
-    "sg-travis": "^1.1.33",
     "sugo-ci-site": "^1.0.21",
     "sqlite3": "^3.1.8"
   }
