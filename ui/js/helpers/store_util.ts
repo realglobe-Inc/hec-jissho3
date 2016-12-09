@@ -44,6 +44,7 @@ export function initialize (store: Redux.Store<any>) {
 
   // 自分の位置
   if (navigator.geolocation) {
+    let handleError = (err) => { console.error('閲覧者の情報を取得できませんでした。') }
     appUtil.getMyLocation()
       .then((location: Location) => {
         let myMarker: Marker = {
@@ -65,10 +66,9 @@ export function initialize (store: Redux.Store<any>) {
               location
             }))
           })
-        }, 5000)
-      }).catch((err) => {
-        console.error('閲覧者の位置情報を取得できませんでした')
-      })
+          .catch(handleError)
+        }, 15000)
+      }).catch(handleError)
   } else {
     debug('Not found navigator.geolocation')
   }
