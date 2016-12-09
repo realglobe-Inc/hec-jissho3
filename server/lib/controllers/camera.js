@@ -153,7 +153,8 @@ const cameraController = {
           let photos = yield Photo.findAll({
             where: {
               cameraId: camera.id
-            }
+            },
+            order: 'createdAt'
           })
           ctx.body = photos
         })

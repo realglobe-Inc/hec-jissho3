@@ -73,7 +73,7 @@ class PhotoList extends React.Component<Props, State> {
     const s = this
     // photos は古い順にセットされている
     // TODO ここで制限するべきかどうか
-    let max = 20
+    let max = 100
     let listHeight = window.innerHeight - parseInt(cssVars['header-height'], 10)
     return (
       <div className='photo-list' style={{height: `${listHeight}px`}}>
