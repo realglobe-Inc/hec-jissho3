@@ -153,8 +153,8 @@ class ReportObserver {
       }
 
       // open でない通報は無視する
-      let isOpen = !!found && found.is_open
-      if (!isOpen) {
+      let isClosed = !!found && !found.is_open
+      if (isClosed) {
         return
       }
 
