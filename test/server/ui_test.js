@@ -29,6 +29,7 @@ describe('UI server', function () {
   before(() => co(function * () {
     yield uiServer.listen(port.UI)
     yield uiServer.actor.connect()
+    yield asleep(200)
     compassCaller = yield uiServer.watchSharedPhoto()
 
     mockServer = sgServer({
