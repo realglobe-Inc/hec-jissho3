@@ -118,7 +118,7 @@ class ReportObserver {
   /**
    * 通報データをDBにつっこむ
    * はじめて通報が来たら Report にもつっこむ。
-   * 毎回 ReportInfo につっこむ。
+   * Report が open である限り毎回 ReportInfo につっこむ。
    */
   _pushReportDb ({actorKey, event}) {
     const s = this
@@ -149,6 +149,13 @@ class ReportObserver {
           is_open: true,
           report_at: infoData.date
         })
+
+      }
+
+      // open でない通報は無視する
+      let isOpen = !!found && found.is_open
+      if (!isOpen) {
+        return
       }
 
       yield ReportInfo.create(infoData)
