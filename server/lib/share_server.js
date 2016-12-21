@@ -3,14 +3,8 @@
  */
 
 const sgServer = require('sg-server')
-const koaBody = require('koa-body')({
-  multipart: true
-})
 const endpoints = require('./endpoints/share')
 
-let shareServer = sgServer({
-  endpoints,
-  middlewares: [ koaBody ]
-})
+let shareServer = sgServer({ endpoints })
 
 module.exports = shareServer

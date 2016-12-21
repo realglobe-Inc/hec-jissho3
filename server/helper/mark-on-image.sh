@@ -10,6 +10,8 @@ color=${COLOR:=red}
 circle_factor=${CIRCLE_FACTOR:=16}
 # 円周の線が半径の何分の1か
 stroke_factor=${STROKE_FACTOR:=6}
+# 生成する画像の場所
+output_image_dir=${OUTPUT_IMAGE_DIR:=$(dirname $0)/../public/uploaded/share}
 
 
 if [ $# -ne 2 ]; then
@@ -39,10 +41,11 @@ stroke_size=$(((${circle_size} + ${stroke_factor} - 1) / ${stroke_factor}))
 
 
 file_ext=${image_path##*.}
-path_prefix=${image_path%.${file_ext}}
+file_name=$(basename $image_path)
+file_prefix=${file_name%.${file_ext}}
 suffix=0
 while true; do
-  output_image_path=${path_prefix}_${suffix}.${file_ext}
+  output_image_path=${output_image_dir}/${file_prefix}_${suffix}.${file_ext}
   if ! [ -e ${output_image_path} ]; then
     break
   fi
