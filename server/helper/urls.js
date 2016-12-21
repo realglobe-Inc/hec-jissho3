@@ -6,6 +6,7 @@ var encode = require('urlencode')
 var { REST_URL } = require('@self/server/lib/consts')
 var CAMERA_URL = REST_URL.OF_CAMERA
 var REPORT_URL = REST_URL.OF_REPORT
+var SHARE_URL = REST_URL.OF_SHARE
 
 function replace (target, opt) {
   var keys = Object.keys(opt)
@@ -58,6 +59,18 @@ var urls = {
     },
     closeReport (report_full_id) {
       return replace(REPORT_URL.CLOSE_REPORT, { report_full_id })
+    }
+  },
+
+  /**
+   * URL of share server
+   */
+  share: {
+    photo () {
+      return SHARE_URL.PHOTO
+    },
+    hash () {
+      return SHARE_URL.HASH
     }
   }
 }
