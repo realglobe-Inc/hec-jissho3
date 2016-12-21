@@ -1,6 +1,7 @@
 {
   "default": {
     "PUBLIC_DIR": "public",
-    "PHOTO_DIR": "public/uploaded/photos"
+    "PHOTO_DIR": "public/uploaded/photos",
+    "SHARE_PATH": "public/uploaded/share/img"
   }
 }

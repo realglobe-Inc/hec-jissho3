@@ -3,6 +3,7 @@
     "UI": 3201,
     "CAMERA": 3202,
     "REPORT": 3203,
+    "SHARE": 3204,
     "PROXY": 3230,
     "DEV": 3000,
     "AR_COMPASS": 3398

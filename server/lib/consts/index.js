@@ -14,6 +14,11 @@ module.exports = {
       // OPEN_REPORT  : '/rest/reports/open/:report_full_id',
       CLOSE_REPORTS: '/rest/reports/close',
       CLOSE_REPORT : '/rest/reports/close/:report_full_id'
+    },
+
+    OF_SHARE: {
+      PHOTO: '/rest/share/photo',
+      HASH: '/rest/share/hash'
     }
   },
 
