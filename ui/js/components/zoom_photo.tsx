@@ -1,6 +1,5 @@
 import * as React from 'react'
 import * as c from 'classnames'
-import { ApButton } from 'apeman-react-button'
 import * as bRequest from 'browser-request'
 import urls from '../helpers/urls'
 
@@ -8,11 +7,13 @@ const debug = require('debug')('hec:zoom_image')
 
 interface Props {
   image: string
+  onClose: any
 }
 
 interface State {
-  circleCood: string
-  circleStyle: React.CSSProperties
+  circleCood?: string
+  circleStyle?: React.CSSProperties
+  requesting?: boolean
 }
 
 class ZoomPhoto extends React.Component<Props, State> {
@@ -20,7 +21,8 @@ class ZoomPhoto extends React.Component<Props, State> {
     super()
     this.state = {
       circleCood: '',
-      circleStyle: {}
+      circleStyle: {},
+      requesting: false,
     }
   }
 
@@ -28,25 +30,39 @@ class ZoomPhoto extends React.Component<Props, State> {
 
   render () {
     const s = this
-    let { image } = s.props
-    let { circleCood, circleStyle } = s.state
+    let { image, onClose } = s.props
+    let { circleCood, circleStyle, requesting } = s.state
     let disabled = circleCood.length === 0
     return (
-      <div className='photo-zoom'>
-        <img className='photo-zoom-img' src={urls.getPhoto(image)} onClick={s.putCircle.bind(s)} ref={(img) => s.zoomImage = img} />
-        <div className='photo-zoom-share-button'>
-          <ApButton wide onTap={s.share.bind(s)} disabled={disabled}>共有する</ApButton>
+      <div className='photo-zoom' onClick={s.putCircle.bind(s)}>
+
+        <div className='photo-zoom-header'>
+          <div className='photo-zoom-title'>
+            空撮画像(画像をクリックすると円が描画されます)
+          </div>
+          <div className='photo-zoom-share'>
+            <i className='fa fa-3x fa-share' onClick={s.share.bind(s)}/>
+          </div>
+          <div className='photo-zoom-close'>
+            <i className='fa fa-3x fa-times' onClick={onClose}/>
+          </div>
         </div>
+
+        <img className='photo-zoom-img' src={urls.getPhoto(image)} ref={(img) => s.zoomImage = img} />
         <div className={c('photo-zoom-circle', disabled ? 'hidden' : '')} style={circleStyle}></div>
-        <div className='photo-zoom-message'>
-          画像をクリックすると円が描画されます。
+        <div className={c('photo-zoom-requesting', requesting ? '' : 'hidden')}>
+          <div className='photo-zoom-requesting-message'>
+            共有中
+          </div>
+          <i className='photo-zoom-spinner fa fa-spinner fa-pulse fa-5x fa-fw'/>
         </div>
+
       </div>
     )
   }
 
-
-  share () {
+  share (e: MouseEvent) {
+    e.stopPropagation()
     const s = this
     let { image } = s.props
     let { circleCood } = s.state
@@ -65,6 +81,7 @@ class ZoomPhoto extends React.Component<Props, State> {
       body,
       json: true,
     }, (err, res, body) => {
+      s.setState({ requesting: false })
       if (err) {
         throw err
       }
@@ -72,14 +89,13 @@ class ZoomPhoto extends React.Component<Props, State> {
         window.alert(res.body)
         return
       }
-      window.alert('OK')
     })
+    s.setState({ requesting: true })
   }
 
   putCircle (e: MouseEvent) {
-    const s = this
     e.stopPropagation()
-
+    const s = this
     let imgRect = s.zoomImage.getBoundingClientRect()
     let circleX = Math.floor((e.clientX - imgRect.left) / imgRect.width * s.zoomImage.naturalWidth)
     let circleY = Math.floor((e.clientY - imgRect.top) / imgRect.height * s.zoomImage.naturalHeight)

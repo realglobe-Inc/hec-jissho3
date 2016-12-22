@@ -73,30 +73,85 @@ $photo-list-width: 340px;
   box-shadow: 8px 8px 15px 1px #666;
   cursor: pointer;
   position: relative;
+  &-header {
+    width: 100%;
+    height: 4em;
+    position: absolute;
+    left: 0;
+    top: -4em;
+    background: $app-color;
+  }
   &-img {
     width: 100%;
     height: 100%;
   }
-  &-share-button {
-    position: absolute;
-    top: 1em;
-    left: 2em;
+  &-title {
     font-size: 2em;
-    .ap-button {
-      background: rgba(white, 0.6);
-    }
+    margin-left: 1em;
+    color: white;
+    height: 2em;
+    line-height: 2em;
   }
-  &-message {
+  &-share {
     position: absolute;
-    font-size: 1.3em;
-    top: 1em;
+    text-align: center;
+    top: 0.2em;
+    right: 6em;
+    color: white;
+    padding: 4px;
+    width: 3em;
+    height: 3em;
+    border-radius: 50%;
+    background: rgba(black,0.3);
+    z-index: 81;
+  }
+  &-close {
+    position: absolute;
+    text-align: center;
+    top: 0.2em;
     right: 1em;
     color: white;
+    padding: 4px;
+    width: 3em;
+    height: 3em;
+    border-radius: 50%;
+    background: rgba(black,0.3);
+    z-index: 81;
   }
+  /*&-message {
+    position: absolute;
+    font-size: 1.3em;
+    bottom: 1em;
+    right: 1em;
+    color: white;
+  }*/
   &-circle {
     position: absolute;
     border-radius: 50%;
     border: 14px solid red;
+  }
+  &-requesting {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background: rgba(white, 0.4);
+    color: #444;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    &-message {
+      font-size: 2em;
+      margin-bottom: 0.5em;
+    }
+  }
+  &-spinner {
+    display: block;
   }
 }
 

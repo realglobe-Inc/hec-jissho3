@@ -62,7 +62,7 @@ class PhotoList extends React.Component<Props, State> {
         </div>
 
         <div className={c('photo-zoom-outer', s.state.modalMode ? '' : 'hidden')} onClick={s.closeModal.bind(s)}>
-          {s.renderZoomImage()}
+          {s.state.modalMode ? s.renderZoomImage() : null}
         </div>
 
       </div>
@@ -103,7 +103,7 @@ class PhotoList extends React.Component<Props, State> {
       return null
     }
     return (
-      <ZoomPhoto image={selectedPhoto.image} />
+      <ZoomPhoto image={selectedPhoto.image} onClose={s.closeModal.bind(s)}/>
     )
   }
 
@@ -120,7 +120,8 @@ class PhotoList extends React.Component<Props, State> {
     })
   }
 
-  closeModal () {
+  closeModal (e: MouseEvent) {
+    e.stopPropagation()
     this.setState({ modalMode: false })
   }
 
