@@ -1,4 +1,5 @@
 import * as React from 'react'
+import * as c from 'classnames'
 import { ApButton } from 'apeman-react-button'
 import * as bRequest from 'browser-request'
 import urls from '../helpers/urls'
@@ -10,13 +11,17 @@ interface Props {
 }
 
 interface State {
-  circleCood?: string
+  circleCood: string
+  circleStyle: React.CSSProperties
 }
 
 class ZoomPhoto extends React.Component<Props, State> {
   constructor () {
     super()
-    this.state = {}
+    this.state = {
+      circleCood: '',
+      circleStyle: {}
+    }
   }
 
   zoomImage: HTMLImageElement
@@ -24,13 +29,15 @@ class ZoomPhoto extends React.Component<Props, State> {
   render () {
     const s = this
     let { image } = s.props
-    let disableShare = !s.state.circleCood
+    let { circleCood, circleStyle } = s.state
+    let disabled = circleCood.length === 0
     return (
       <div className='photo-zoom'>
-        <img src={urls.getPhoto(image)} onClick={s.putCircle.bind(s)} ref={(img) => s.zoomImage = img} />
-        <div className='share-photo-button'>
-          <ApButton wide onTap={s.share.bind(s)} disabled={disableShare}>共有する</ApButton>
+        <img className='photo-zoom-img' src={urls.getPhoto(image)} onClick={s.putCircle.bind(s)} ref={(img) => s.zoomImage = img} />
+        <div className='photo-zoom-share-button'>
+          <ApButton wide onTap={s.share.bind(s)} disabled={disabled}>共有する</ApButton>
         </div>
+        <div className={c('photo-zoom-circle', disabled ? 'hidden' : '')} style={circleStyle}></div>
         <div className='photo-zoom-message'>
           画像をクリックすると円が描画されます。
         </div>
@@ -43,18 +50,19 @@ class ZoomPhoto extends React.Component<Props, State> {
     const s = this
     let { image } = s.props
     let { circleCood } = s.state
-    if (!circleCood) {
+    if (circleCood.length === 0) {
       window.alert('画像をクリックして円を描いてください')
       return
     }
-    console.log({image, circleCood})
+    let body = {
+      image,
+      circleCood,
+    }
+    console.log(body)
     bRequest({
       method: 'POST',
       url: urls.sharePhoto(),
-      body: {
-        image,
-        circleCood,
-      },
+      body,
       json: true,
     }, (err, res, body) => {
       if (err) {
@@ -73,12 +81,24 @@ class ZoomPhoto extends React.Component<Props, State> {
     e.stopPropagation()
 
     let imgRect = s.zoomImage.getBoundingClientRect()
-    let x = Math.floor((e.clientX - imgRect.left) / imgRect.width * s.zoomImage.naturalWidth)
-    let y = Math.floor((e.clientY - imgRect.top) / imgRect.height * s.zoomImage.naturalHeight)
+    let circleX = Math.floor((e.clientX - imgRect.left) / imgRect.width * s.zoomImage.naturalWidth)
+    let circleY = Math.floor((e.clientY - imgRect.top) / imgRect.height * s.zoomImage.naturalHeight)
+    let circleCood = `${circleX}x${circleY}`
 
-    let circleCood = `${x}x${y}`
+    // 半径が16分の1
+    let width = Math.floor(imgRect.width / 8)
+    let height = width
+    let circleStyle = {
+      left: `${e.clientX - imgRect.left - width / 2}px`,
+      top: `${e.clientY - imgRect.top - height / 2}px`,
+      width,
+      height,
+    }
     debug(circleCood)
-    s.setState({ circleCood })
+    s.setState({
+      circleCood,
+      circleStyle
+    })
   }
 }
 
