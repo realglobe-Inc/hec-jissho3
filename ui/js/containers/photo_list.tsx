@@ -11,7 +11,7 @@ import appUtil from '../helpers/app_util'
 import * as sugoCaller from 'sugo-caller'
 import { Store } from '../interfaces/store'
 import { ApButton } from 'apeman-react-button'
-import * as bRequest from 'browser-request'
+import ZoomPhoto from '../components/zoom_photo'
 
 const cssVars = require('../../scss/vars.json')
 const { DATA_SYNC_ACTOR } = require('@self/server/lib/consts').SUGOS
@@ -103,12 +103,7 @@ class PhotoList extends React.Component<Props, State> {
       return null
     }
     return (
-      <div className='photo-zoom'>
-        <div className='share-photo-button'>
-          <ApButton wide onTap={s.sendPhotoInfo.bind(s)}>共有する</ApButton>
-        </div>
-        <img src={urls.getPhoto(selectedPhoto.image)} />
-      </div>
+      <ZoomPhoto image={selectedPhoto.image} />
     )
   }
 
@@ -129,18 +124,22 @@ class PhotoList extends React.Component<Props, State> {
     this.setState({ modalMode: false })
   }
 
-  sendPhotoInfo () {
-    // TODO 共有されている画像についてもstoreで管理すべき
-    let photo = this.state.selectedPhoto
-    let caller = this.props.callers.get(DATA_SYNC_ACTOR.KEY)
-    let syncer = caller.get(DATA_SYNC_ACTOR.MODULE)
-    syncer.update({
-      key: 'sharedPhoto',
-      nextValue: photo
-    }).catch((err) => {
-      throw err
-    })
-  }
+  
+
+
+  // // AR-compass server
+  // sendPhotoInfo () {
+  //   // TODO 共有されている画像についてもstoreで管理すべき
+  //   let photo = this.state.selectedPhoto
+  //   let caller = this.props.callers.get(DATA_SYNC_ACTOR.KEY)
+  //   let syncer = caller.get(DATA_SYNC_ACTOR.MODULE)
+  //   syncer.update({
+  //     key: 'sharedPhoto',
+  //     nextValue: photo
+  //   }).catch((err) => {
+  //     throw err
+  //   })
+  // }
 }
 
 export default connect(

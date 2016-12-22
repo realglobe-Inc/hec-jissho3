@@ -81,5 +81,11 @@ export default {
    */
   getPhotoList () : string {
     return ORIGIN_URL + restUrls.camera.getPhotoList(camera.uuid) + `?token=${camera.token}`
-  }
+  },
+  /**
+   * 写真の共有
+   */
+  sharePhoto () {
+    return ORIGIN_URL + restUrls.share.photo()
+  },
 }
