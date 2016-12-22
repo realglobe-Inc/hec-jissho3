@@ -7,6 +7,6 @@ co(function * () {
   yield uiServer.listen(port.UI)
   console.log(`UI server listening on port ${port.UI}`)
   yield uiServer.actor.connect()
-  yield uiServer.watchSharedPhoto()
+  // yield uiServer.watchSharedPhoto()
 }).catch(err => console.error(err))
 

@@ -103,7 +103,7 @@ class PhotoList extends React.Component<Props, State> {
       return null
     }
     return (
-      <ZoomPhoto image={selectedPhoto.image} onClose={s.closeModal.bind(s)}/>
+      <ZoomPhoto image={selectedPhoto.image} onClose={s.closeModal.bind(s)} onShare={s.notifyShare.bind(s)}/>
     )
   }
 
@@ -125,7 +125,17 @@ class PhotoList extends React.Component<Props, State> {
     this.setState({ modalMode: false })
   }
 
-  
+  notifyShare (url: string) {
+    const s = this
+    let caller = s.props.callers.get(DATA_SYNC_ACTOR.KEY)
+    let syncer = caller.get(DATA_SYNC_ACTOR.MODULE)
+    syncer.update({
+      key: 'sharedPhoto',
+      nextValue: { url }
+    }).catch((err) => {
+      throw err
+    })
+  }
 
 
   // // AR-compass server

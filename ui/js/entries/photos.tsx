@@ -14,18 +14,19 @@ import auth from '../helpers/auth'
 const rootElement = document.getElementById('site')
 const camera = require('@self/server/env/camera.json').default
 
-class Photo extends React.Component<{}, { photo?: PhotoInfo }> {
+class Photo extends React.Component<{}, { url: string }> {
   constructor () {
     super()
-    this.state = {}
+    this.state = {
+      url: ''
+    }
   }
 
   render () {
-    let { photo } = this.state
-    let url = photo ? urls.getPhoto(photo.image) : null
+    let url = this.state.url
     if (url) {
       return (
-        <img src={url} width={`${window.innerWidth}px`}/>
+        <img src={'/jissho3' + url} width={`${window.innerWidth}px`}/>
       )
     } else {
         let style: React.CSSProperties = {
@@ -50,10 +51,10 @@ class Photo extends React.Component<{}, { photo?: PhotoInfo }> {
     const s = this
 
     // caller が写真変更イベントを受け取ったら写真を更新する
-    let onChangePhoto = (photo: PhotoInfo) => {
-      console.log('change', photo)
+    let onChangePhoto = ({ url }) => {
+      console.log('change', url)
       s.setState({
-        photo
+        url
       })
     }
     connectDataSyncCaller(onChangePhoto)

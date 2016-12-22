@@ -39,6 +39,15 @@ function waitUntilUploaded () {
   })
 }
 
+function toUrl (path) {
+  let i = path.indexOf('/uploaded')
+  if (i < 0) {
+    return ''
+  }
+  let url = path.slice(i)
+  return url
+}
+
 /** @lends shareController */
 const shareController = {
   /**
@@ -46,15 +55,14 @@ const shareController = {
    */
   url: (ctx) => co(function * () {
     yield waitUntilUploaded()
-    let i = imagePath.indexOf('/uploaded')
-    if (i < 0) {
+    let url = toUrl(imagePath)
+    if (url.length === 0) {
       ctx.body = {
         found: false,
         url: ''
       }
       return
     }
-    let url = imagePath.slice(i)
     ctx.body = {
       found: true,
       url
@@ -90,7 +98,9 @@ const shareController = {
       isUploading = false
 
       debug('Uploaded', imagePath)
-      ctx.body = { success: true }
+      ctx.body = {
+        url: toUrl(imagePath)
+      }
     })
   ]),
 }

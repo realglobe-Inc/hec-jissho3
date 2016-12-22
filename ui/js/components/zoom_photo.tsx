@@ -8,6 +8,7 @@ const debug = require('debug')('hec:zoom_image')
 interface Props {
   image: string
   onClose: any
+  onShare: any
 }
 
 interface State {
@@ -89,6 +90,8 @@ class ZoomPhoto extends React.Component<Props, State> {
         window.alert(res.body)
         return
       }
+      let { url } = body
+      s.props.onShare(url)
     })
     s.setState({ requesting: true })
   }

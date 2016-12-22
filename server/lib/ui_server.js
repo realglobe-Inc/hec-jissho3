@@ -6,7 +6,7 @@ const env = require('@self/server/env')
 const { join } = require('path')
 const { SUGOS_URL } = require('./consts')
 const createDataSyncActor = require('./helpers/data_sync_actor')
-const watchSharedPhoto = require('./helpers/post_ar_compass_caller.js')
+// const watchSharedPhoto = require('./helpers/post_ar_compass_caller.js')
 const { UiServer } = require('./config')
 
 let isTest = process.env.NODE_ENV === 'test'
@@ -30,6 +30,6 @@ let config = {
 const uiServer = sugoHub(config)
 
 uiServer.actor = createDataSyncActor()
-uiServer.watchSharedPhoto = watchSharedPhoto
+// uiServer.watchSharedPhoto = watchSharedPhoto
 
 module.exports = uiServer

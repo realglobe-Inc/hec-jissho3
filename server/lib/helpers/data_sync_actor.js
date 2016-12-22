@@ -13,11 +13,7 @@ let state = {
     lng: 139.753148
   },
   sharedPhoto: {
-    isSelected: false,
-    info: null,
-    image: '',
-    createdAt: '',
-    uuid: ''
+    url: ''
   },
   reportClosed: {
     report: {}
