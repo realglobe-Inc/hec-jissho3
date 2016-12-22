@@ -5,9 +5,7 @@
 'use strict'
 
 const filecopy = require('filecopy')
-const calcHash = require('md5-file/promise')
 const co = require('co')
-const fs = require('fs')
 const { exec } = require('child_process')
 const compose = require('sg-server/lib/compose')
 const { join } = require('path')
@@ -17,7 +15,6 @@ const schemaMW = require('../middlewares/schema_mw')
 const { paths } = require('@self/server/env')
 const debug = require('debug')('hec:share:controller')
 
-const readFileAsync = promisify(fs.readFile)
 const execAsync = promisify(exec)
 
 const PUBLIC_DIR = join(__dirname, '../../public')
@@ -25,7 +22,6 @@ const MARK_COMMAND = join(__dirname, '../../helper/mark-on-image.sh')
 
 // Variables in the controller
 let imagePath = ''
-let hash = ''
 let isUploading = false
 
 function waitUntilUploaded () {
@@ -46,12 +42,23 @@ function waitUntilUploaded () {
 /** @lends shareController */
 const shareController = {
   /**
-   * Get a photo
+   * Get a photo URL
    */
-  one: (ctx) => co(function * () {
+  url: (ctx) => co(function * () {
     yield waitUntilUploaded()
-    let imgData = yield readFileAsync(imagePath)
-    ctx.body = imgData
+    let i = imagePath.indexOf('/uploaded')
+    if (i < 0) {
+      ctx.body = {
+        found: false,
+        url: ''
+      }
+      return
+    }
+    let url = imagePath.slice(i)
+    ctx.body = {
+      found: true,
+      url
+    }
   }),
   /**
    * Create a photo
@@ -82,17 +89,10 @@ const shareController = {
       imagePath = output.toString().trim()
       isUploading = false
 
-      hash = yield calcHash(imagePath)
-      debug('Uploaded', hash)
+      debug('Uploaded', imagePath)
       ctx.body = { success: true }
     })
   ]),
-  /**
-   * Get a photo hash
-   */
-  hash: (ctx) => co(function * () {
-    ctx.body = { hash }
-  }),
 }
 
 module.exports = shareController

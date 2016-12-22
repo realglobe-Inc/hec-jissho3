@@ -11,8 +11,9 @@ circle_factor=${CIRCLE_FACTOR:=16}
 # 円周の線が半径の何分の1か
 stroke_factor=${STROKE_FACTOR:=6}
 # 生成する画像の場所
-output_image_dir=${OUTPUT_IMAGE_DIR:=$(dirname $0)/../public/uploaded/share}
+output_image_dir=${OUTPUT_IMAGE_DIR:=$(dirname $0)/../public/uploaded/photos/share}
 
+mkdir -p $output_image_dir
 
 if [ $# -ne 2 ]; then
   echo "Usage: $0 IMAGE_PATH TARGET_COORDINATE" >&2

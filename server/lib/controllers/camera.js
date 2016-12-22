@@ -111,7 +111,6 @@ const cameraController = {
           let created = yield Photo.create(data)
           ctx.status = 201
           ctx.body = { created }
-          // notify({ event: 'rest:photo:created', data: { id: created.id, cameraId: camera.id } })
         })
       }
     ]),

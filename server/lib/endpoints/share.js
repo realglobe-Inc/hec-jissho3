@@ -10,9 +10,8 @@ const controller = require('../controllers/share')
 module.exports = {
   [URL.PHOTO]: {
     POST: controller.create,
-    GET: controller.one,
   },
-  [URL.HASH]: {
-    GET: controller.hash,
+  [URL.URL]: {
+    GET: controller.url,
   }
 }

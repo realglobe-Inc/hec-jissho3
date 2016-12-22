@@ -52,7 +52,9 @@ co(function * () {
           // Access token
           token: camera.token,
           // File data
-          image: fs.createReadStream(mockImage)
+          image: fs.createReadStream(mockImage),
+          // File extension
+          extension: '.jpg'
         }
       })
       let { cameraId, uuid, image } = photo

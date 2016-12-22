@@ -18,7 +18,7 @@ module.exports = {
 
     OF_SHARE: {
       PHOTO: '/rest/share/photo',
-      HASH: '/rest/share/hash'
+      URL: '/rest/share/url',
     }
   },
 
