@@ -37,7 +37,7 @@ class ZoomPhoto extends React.Component<Props, State> {
     return (
       <div className='photo-zoom' onClick={s.putCircle.bind(s)}>
 
-        <div className='photo-zoom-header'>
+        <div className='photo-zoom-header' onClick={s.stopPropagation.bind(s)}>
           <div className='photo-zoom-title'>
             空撮画像(画像をクリックすると円が描画されます)
           </div>
@@ -49,17 +49,23 @@ class ZoomPhoto extends React.Component<Props, State> {
           </div>
         </div>
 
-        <img className='photo-zoom-img' src={urls.getPhoto(image)} ref={(img) => s.zoomImage = img} />
-        <div className={c('photo-zoom-circle', disabled ? 'hidden' : '')} style={circleStyle}></div>
-        <div className={c('photo-zoom-requesting', requesting ? '' : 'hidden')}>
-          <div className='photo-zoom-requesting-message'>
-            共有中
+        <div className='photo-zoom-body'>
+          <img className='photo-zoom-img' src={urls.getPhoto(image)} ref={(img) => s.zoomImage = img} />
+          <div className={c('photo-zoom-circle', disabled ? 'hidden' : '')} style={circleStyle}></div>
+          <div className={c('photo-zoom-requesting', requesting ? '' : 'hidden')}>
+            <div className='photo-zoom-requesting-message'>
+              共有中
+            </div>
+            <i className='photo-zoom-spinner fa fa-spinner fa-pulse fa-5x fa-fw'/>
           </div>
-          <i className='photo-zoom-spinner fa fa-spinner fa-pulse fa-5x fa-fw'/>
         </div>
 
       </div>
     )
+  }
+
+  stopPropagation (e: MouseEvent) {
+    e.stopPropagation()
   }
 
   share (e: MouseEvent) {

@@ -135,12 +135,14 @@ class AreaReport extends React.Component<Props, State> {
         </div>
 
         <div className='bottom-buttons'>
+          {/*
           <ApButton
             primary wide style={{border: '0 solid'}}
             onTap={s.shareReport.bind(s)}
             >
             共有する
           </ApButton>
+          */}
           <ApButton
             primary wide danger style={{border: '0 solid'}}
             onTap={s.showConfirmWindow.bind(s)}
