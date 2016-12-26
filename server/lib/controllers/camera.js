@@ -153,7 +153,8 @@ const cameraController = {
             where: {
               cameraId: camera.id
             },
-            order: 'createdAt'
+            order: 'createdAt',
+            limit: 1000 // 上限を設定
           })
           ctx.body = photos
         })
