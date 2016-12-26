@@ -12,12 +12,12 @@ let links = [
   },
   {
     url: 'photos.html',
-    text: '隊員用画面'
+    text: 'ヘッドマウント共有画面'
   },
-  {
-    url: 'headmount.html',
-    text: 'ヘッドマウント情報画面'
-  }
+  // {
+  //   url: 'headmount.html',
+  //   text: 'ヘッドマウント共有画面'
+  // }
 ]
 
 document.addEventListener('DOMContentLoaded', () => {
