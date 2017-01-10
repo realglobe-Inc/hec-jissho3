@@ -58,7 +58,7 @@
     "style-loader": "^0.13.1",
     "sugo-actor": "^4.4.6",
     "sugo-caller": "^3.0.5",
-    "sugo-hub": "^4.0.14",
+    "sugo-hub": "5.1.2",
     "sugo-observer": "^2.0.8",
     "ts-loader": "^1.2.2",
     "typescript": "^2.1.1",
