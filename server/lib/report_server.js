@@ -2,6 +2,7 @@
  * SUGO-Hub Server to manage reports
  */
 const sugoHub = require('sugo-hub')
+const { join } = require('path')
 const env = require('@self/server/env')
 const endpoints = require('./endpoints/report')
 const Observer = require('./helpers/report_observer')
@@ -19,7 +20,8 @@ let config = {
   },
   socketIoOptions: {
     path: SUGOS_URL.REPORT_PATH
-  }
+  },
+  logFile: join(__dirname, '../../var/log/report_server.log')
 }
 
 let reportServer = sugoHub(config)

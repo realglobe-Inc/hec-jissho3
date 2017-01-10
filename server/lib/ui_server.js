@@ -24,7 +24,8 @@ let config = {
   },
   socketIoOptions: {
     path: SUGOS_URL.UI_PATH
-  }
+  },
+  logFile: join(__dirname, '../../var/log/ui_server.log')
 }
 
 const uiServer = sugoHub(config)
