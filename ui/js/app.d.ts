@@ -1,5 +1,6 @@
 declare function require(string): any;
 declare var process;
+declare var google;
 
 declare module 'apeman-react-button'
 declare module 'classnames'

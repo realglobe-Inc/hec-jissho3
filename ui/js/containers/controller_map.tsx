@@ -47,6 +47,10 @@ class ControllerMap extends React.Component<Props, any> {
    */
   createMapOptions () {
     return {
+      mapTypeControl: true,
+      mapTypeControlOptions: {
+        position: google.maps.ControlPosition.TOP_CENTER
+      },
       styles: mapStyle
     }
   }
