@@ -13,6 +13,7 @@ const photos: Reducer<Store.Photos> = (state: Store.Photos = init, action: Actio
   switch (action.type) {
     case Actions.SET_PHOTOS:
       let setting = action.photos
+        .map((photo) => Object.assign(photo, { createdAt: new Date(photo.createdAt.toString()) }))
         .sort((photo1, photo2) => Number(photo1.createdAt) - Number(photo2.createdAt))
         .map((photo) => [photo.uuid, photo])
       return Im.OrderedMap<string, PhotoInfo>(setting)

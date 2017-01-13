@@ -47,7 +47,7 @@ co(function * () {
   debug('Hitoe actor key:', ACTOR_KEY)
   debug('Hitoe report id: ', id)
   let location = randLocation()
-  let reports = (new Array(10)).fill(1).map((v, i) => ({
+  let reports = (new Array(1000)).fill(1).map((v, i) => ({
     id,
     location,
     heartRate: randHeart()
