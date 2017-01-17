@@ -85,6 +85,22 @@ function initializeReporter (key: string, caller: Caller) {
       return
     }
     store.dispatch(actions.reports.UpdateReportInfo(info))
+    let { lat, lng } = info.location
+    let validLocation = lat > 0 && lng > 0
+    if (validLocation) {
+      let { markers } = store.getState()
+      let marker = markers.find((marker) => marker.keys.reportFullId === info.reportFullId, null)
+      if (!marker) {
+        return
+      }
+      store.dispatch(actions.markers.updateMarker({
+        id: marker.id,
+        location: {
+          lat,
+          lng
+        }
+      }))
+    }
   })
 }
 

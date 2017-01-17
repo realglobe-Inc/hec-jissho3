@@ -46,10 +46,10 @@ co(function * () {
   let id = Math.floor(Math.random() * 1000000)
   debug('Hitoe actor key:', ACTOR_KEY)
   debug('Hitoe report id: ', id)
-  let location = randLocation()
+  let [lat, lng, h] = randLocation()
   let reports = (new Array(1000)).fill(1).map((v, i) => ({
     id,
-    location,
+    location: [lat, lng + i * 0.0001, h],
     heartRate: randHeart()
   }))
   for (let report of reports) {
