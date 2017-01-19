@@ -19,7 +19,7 @@ class ControllerPanelSelect extends React.Component<Props, any> {
     let {markers, selectedMarker} = s.props.storeState
     return (
       <div className='controller-panel-select'>
-        {markers.map(marker =>
+        {markers.toArray().map(marker =>
           (
             <div className={'controller-panel-item' + (marker.id === selectedMarker.id ? ' controller-panel-item-selected' : '')}
                  key={marker.id}

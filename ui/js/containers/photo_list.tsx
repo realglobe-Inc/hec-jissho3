@@ -79,7 +79,7 @@ class PhotoList extends React.Component<Props, State> {
       <div className='photo-list' style={{height: `${listHeight}px`}}>
         {s.props.photos.toArray().reverse().slice(0, max).map((photo) => {
           return (
-            <div className='photo-list-item-wrapper'>
+            <div className='photo-list-item-wrapper' key={photo.uuid}>
               <img className='photo-list-item'
                   src={urls.getPhoto(photo.image, THUMBNAIL_PHOTO_SIZE)}
                   onClick={s.openModal.bind(this)}

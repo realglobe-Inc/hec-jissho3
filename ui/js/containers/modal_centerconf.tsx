@@ -21,10 +21,15 @@ interface Props {
 }
 
 class ModalCenterconf extends React.Component<Props, any> {
+  constructor () {
+    super()
+    const s = this
+    s._refs = {}
+  }
 
-  refs: {
-    inputLat: HTMLInputElement
-    inputLng: HTMLInputElement
+  _refs: {
+    inputLat?: HTMLInputElement
+    inputLng?: HTMLInputElement
   }
 
   render () {
@@ -40,10 +45,10 @@ class ModalCenterconf extends React.Component<Props, any> {
         <div className={visible ? 'modal-centerconf' : ''}>
           <h4>本部の位置を変更</h4>
           <div className='item'>
-            緯度(lat): <input type='text' ref={(input) => s.refs.inputLat = input} defaultValue={String(lat)}/>
+            緯度(lat): <input type='text' ref={(input) => s._refs.inputLat = input} defaultValue={String(lat)}/>
           </div>
           <div className='item'>
-            経度(lng): <input type='text' ref={(input) => s.refs.inputLng = input} defaultValue={String(lng)}/>
+            経度(lng): <input type='text' ref={(input) => s._refs.inputLng = input} defaultValue={String(lng)}/>
           </div>
           <div className='buttons'>
             <ApButton onTap={s.update.bind(s)}>変更</ApButton>
@@ -67,8 +72,8 @@ class ModalCenterconf extends React.Component<Props, any> {
 
   update () {
     const s = this
-    let lat = parseFloat(s.refs.inputLat.value)
-    let lng = parseFloat(s.refs.inputLng.value)
+    let lat = parseFloat(s._refs.inputLat.value)
+    let lng = parseFloat(s._refs.inputLng.value)
     let invalid = isNaN(lat) || isNaN(lng)
     if (invalid) {
       window.alert('正しい数値を入力してください。')
