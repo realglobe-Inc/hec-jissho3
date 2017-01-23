@@ -56,6 +56,8 @@ export function connectDataSyncCaller () {
 function initializeReporter (key: string, caller: Caller) {
   let reporter = caller.get(MASTER_ACTOR.MODULE)
   reporter.on(MASTER_ACTOR.NEW_REPORT_EVENT, (report: Report) => {
+    // For Phantom.js
+    console.log(`REPORT:${report.reportFullId}`)
     debug('New report: ', report)
     report.reportAt = new Date(report.reportAt) // Date 型だけ注意
     let marker: Marker = {
@@ -110,6 +112,8 @@ function initializeReporter (key: string, caller: Caller) {
 function initializeCameraMonitor (key: string, caller: Caller) {
   let monitor = caller.get(PHOTO_MONITOR_ACTOR.MODULE)
   monitor.on(PHOTO_MONITOR_ACTOR.CREATED_EVENT, (photo: PhotoInfo) => {
+    // For Phatom.js
+    console.log(`PHOTO:${photo.uuid}`)
     debug(`Added photo ${photo.uuid}`)
     store.dispatch(actions.photos.addPhoto(photo))
   })
