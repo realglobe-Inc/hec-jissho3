@@ -3,7 +3,7 @@
  * UI でも使うので ES5 で書いた。
  */
 var encode = require('urlencode')
-var { REST_URL } = require('@self/server/lib/consts')
+var REST_URL= require('@self/server/lib/consts').REST_URL
 var CAMERA_URL = REST_URL.OF_CAMERA
 var REPORT_URL = REST_URL.OF_REPORT
 var SHARE_URL = REST_URL.OF_SHARE
@@ -14,7 +14,7 @@ function replace (target, opt) {
   for (var i = 0; i < keys.length; i++) {
     var key = keys[i]
     var encoded = encode(opt[key])
-    replaced = replaced.replace(`:${key}`, encoded)
+    replaced = replaced.replace(':' + key, encoded)
   }
   return replaced
 }
@@ -24,26 +24,26 @@ var urls = {
    * URL of camera server
    */
   camera: {
-    createCamera () {
+    createCamera: function () {
       return CAMERA_URL.CAMERAS
     },
-    getCamera (camera_uuid) {
-      return replace(CAMERA_URL.CAMERA, { camera_uuid })
+    getCamera: function (camera_uuid) {
+      return replace(CAMERA_URL.CAMERA, { camera_uuid: camera_uuid })
     },
-    deleteCamera (camera_uuid) {
-      return replace(CAMERA_URL.CAMERA, { camera_uuid })
+    deleteCamera: function (camera_uuid) {
+      return replace(CAMERA_URL.CAMERA, { camera_uuid: camera_uuid })
     },
-    createPhoto (camera_uuid) {
-      return replace(CAMERA_URL.PHOTOS, { camera_uuid })
+    createPhoto: function (camera_uuid) {
+      return replace(CAMERA_URL.PHOTOS, { camera_uuid: camera_uuid })
     },
-    getPhoto (camera_uuid, photo_uuid) {
-      return replace(CAMERA_URL.PHOTO, { camera_uuid, photo_uuid })
+    getPhoto: function (camera_uuid, photo_uuid) {
+      return replace(CAMERA_URL.PHOTO, { camera_uuid: camera_uuid, photo_uuid: photo_uuid })
     },
-    deletePhoto (camera_uuid, photo_uuid) {
-      return replace(CAMERA_URL.PHOTO, { camera_uuid, photo_uuid })
+    deletePhoto: function (camera_uuid, photo_uuid) {
+      return replace(CAMERA_URL.PHOTO, { camera_uuid: camera_uuid, photo_uuid: photo_uuid })
     },
-    getPhotoList (camera_uuid) {
-      return replace(CAMERA_URL.PHOTO_LIST, { camera_uuid })
+    getPhotoList: function (camera_uuid) {
+      return replace(CAMERA_URL.PHOTO_LIST, { camera_uuid: camera_uuid })
     }
   },
 
@@ -51,14 +51,14 @@ var urls = {
    * URL of report server
    */
   report: {
-    getOpenReports () {
+    getOpenReports: function () {
       return REPORT_URL.OPEN_REPORTS
     },
-    getClosedReports () {
+    getClosedReports: function () {
       return REPORT_URL.CLOSE_REPORTS
     },
-    closeReport (report_full_id) {
-      return replace(REPORT_URL.CLOSE_REPORT, { report_full_id })
+    closeReport: function (report_full_id) {
+      return replace(REPORT_URL.CLOSE_REPORT, { report_full_id: report_full_id })
     }
   },
 
@@ -66,10 +66,10 @@ var urls = {
    * URL of share server
    */
   share: {
-    photo () {
+    photo: function () {
       return SHARE_URL.PHOTO
     },
-    hash () {
+    hash: function () {
       return SHARE_URL.HASH
     }
   }
