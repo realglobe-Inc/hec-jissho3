@@ -5567,7 +5567,7 @@ sugo-actor, sugo-actor@^4.4.6:
     sugo-module-base "^1.1.2"
     uuid "^2.0.2"
 
-sugo-caller:
+sugo-caller@^3.0.5:
   version "3.0.5"
   resolved "https://realglobe.artifactoryonline.com/realglobe/api/npm/npm-virtual/sugo-caller/-/sugo-caller-3.0.5.tgz#ce8ac79ee28f0ebe982da3557bed6473a3fa5dee"
   dependencies:
@@ -5608,9 +5608,9 @@ sugo-constants@^2.0.0:
   dependencies:
     co "^4.6.0"
 
-sugo-hub@5.1.3:
-  version "5.1.3"
-  resolved "https://realglobe.artifactoryonline.com/realglobe/api/npm/npm-virtual/sugo-hub/-/sugo-hub-5.1.3.tgz#2372303ba87fd5284d26f38048ccc01af54ab72a"
+sugo-hub@^5.1.5:
+  version "5.1.5"
+  resolved "https://realglobe.artifactoryonline.com/realglobe/api/npm/npm-virtual/sugo-hub/-/sugo-hub-5.1.5.tgz#cf42cb63883475c01e3527f9c960042ebadd0312"
   dependencies:
     asenv "^1.1.0"
     aslogger "^1.0.2"
