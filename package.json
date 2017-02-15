@@ -9,7 +9,7 @@
     "test": "karma start && mocha test/server",
     "prepare": "./ci/setup.js",
     "heroku": "./bin/heroku.js",
-    "heroku-postbuild": "npm run prepare ; ./ci/db/db_sync.js && ./ci/db/db_seed.js"
+    "heroku-postbuild": "./ci/db/db_sync.js && ./ci/db/db_seed.js"
   },
   "repository": "realglobe-Inc/hec-jissho3",
   "author": {

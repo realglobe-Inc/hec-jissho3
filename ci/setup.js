@@ -19,6 +19,7 @@ co(function * () {
 
   // Make simbolic link of this project at node_modules/@self
   let selfPath = 'node_modules/@self'
+  yield execAsync('rm -rf node_modules/@self || true', { cwd })
   yield mkdirpAsync(selfPath)
   let cwd = join(__dirname, '..')
   // Only heroku
