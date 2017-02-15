@@ -5,6 +5,7 @@ const { exec } = require('child_process')
 const { readdir } = require('fs')
 const mkdirp = require('mkdirp')
 const promisify = require('es6-promisify')
+const { join } = require('path')
 
 const mkdirpAsync = promisify(mkdirp)
 const execAsync = promisify(exec)
@@ -26,7 +27,7 @@ co(function * () {
   let existing = yield readdirAsync(selfPath)
   for (let dir of dirs) {
     if (!existing.includes(dir)) {
-      yield execAsync(`ln -s $PWD/${dir} $PWD/${selfPath}/`)
+      yield execAsync(`ln -s $PWD/${dir} $PWD/${selfPath}/`, { cwd: join(__dirname, '..') })
     }
   }
 
