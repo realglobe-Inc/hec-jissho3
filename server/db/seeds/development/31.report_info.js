@@ -1,5 +1,5 @@
 const model = 'ReportInfo'
-const formatter = require('@self/server/helper/formatter')
+const formatter = require('../../../helper/formatter')
 
 let now = new Date()
 const seed = (new Array(3 * 3)).fill(1).map((v, i) => v + i).map((i) => {

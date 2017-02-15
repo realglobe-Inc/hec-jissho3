@@ -1,6 +1,6 @@
 const uuid = require('uuid')
-const generateToken = require('@self/server/helper/generate_token')
-const { camera } = require('@self/server/env')
+const generateToken = require('../../../helper/generate_token')
+const { camera } = require('../../../env')
 
 const model = 'Camera'
 const seed = [1, 2, 3].map((i) => ({

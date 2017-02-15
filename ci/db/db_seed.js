@@ -6,7 +6,7 @@ process.env.DEBUG = 'hec:db'
 process.env.NODE_ENV = process.env.NODE_ENV || 'development'
 
 const co = require('co')
-const db = require('@self/server/db')
+const db = require('../../server/db')
 
 co(function * () {
   yield db.drop()

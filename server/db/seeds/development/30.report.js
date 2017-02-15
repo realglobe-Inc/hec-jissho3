@@ -1,4 +1,4 @@
-const formatter = require('@self/server/helper/formatter')
+const formatter = require('../../../helper/formatter')
 const model = 'Report'
 const seed = [1, 2, 3].map((i) => {
   let actorKey = `qq:reporter:${i}`

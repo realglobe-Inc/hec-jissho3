@@ -3,6 +3,6 @@
  * Sync Datebase
  */
 process.env.DEBUG = 'hec:db'
-const db = require('@self/server/db')
+const db = require('../../server/db')
 
 db.sync()
