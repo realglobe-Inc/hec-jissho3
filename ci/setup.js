@@ -24,12 +24,11 @@ co(function * () {
     'server',
     'ui'
   ]
-  let existing = yield readdirAsync(selfPath)
+  let cwd = join(__dirname, '..')
   for (let dir of dirs) {
-    if (!existing.includes(dir)) {
-      // Only heroku
-      yield execAsync(`ln -s ../../${dir} ${selfPath}/`, { cwd: join(__dirname, '..') })
-    }
+    // Only heroku
+    yield execAsync(`rm node_modules/@self/* || true`, { cwd })
+    yield execAsync(`ln -s ../../${dir} ${selfPath}/`, { cwd })
   }
 
   // externals
