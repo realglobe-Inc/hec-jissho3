@@ -5,6 +5,7 @@
     "REPORT": 3203,
     "SHARE": 3204,
     "PROXY": 3230,
+    "HEROKU": #{process.env.PORT},
     "DEV": 3000,
     "AR_COMPASS": 3398
   }

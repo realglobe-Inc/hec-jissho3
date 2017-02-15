@@ -1321,6 +1321,12 @@ co-body@^4.2.0:
     raw-body "~2.1.2"
     type-is "~1.6.6"
 
+co-request@^0.2.0:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/co-request/-/co-request-0.2.1.tgz#6428c002ad4229b3eda6725022aeccf273bee3fb"
+  dependencies:
+    request "*"
+
 co@^4.6.0:
   version "4.6.0"
   resolved "https://realglobe.artifactoryonline.com/realglobe/api/npm/npm-virtual/co/-/co-4.6.0.tgz#6ea6bdf3d853ae54ccb8e47bfa0bf3f9031fb184"
@@ -1789,9 +1795,9 @@ dateformat@^1.0.11:
     get-stdin "^4.0.1"
     meow "^3.3.0"
 
-debug@*, debug@^2.1.1, debug@^2.2.0:
-  version "2.3.1"
-  resolved "https://realglobe.artifactoryonline.com/realglobe/api/npm/npm-virtual/debug/-/debug-2.3.1.tgz#4b206c092eb4e5b090e429a15d1d89083737ab2b"
+debug@*, debug@2.3.3, debug@^2.1.1, debug@^2.1.3, debug@^2.3.2:
+  version "2.3.3"
+  resolved "https://realglobe.artifactoryonline.com/realglobe/api/npm/npm-virtual/debug/-/debug-2.3.3.tgz#40c453e67e6e13c901ddec317af8986cda9eff8c"
   dependencies:
     ms "0.7.2"
 
@@ -1805,9 +1811,9 @@ debug@2.2.0, debug@~2.2.0:
   dependencies:
     ms "0.7.1"
 
-debug@2.3.3, debug@^2.1.3, debug@^2.3.2:
-  version "2.3.3"
-  resolved "https://realglobe.artifactoryonline.com/realglobe/api/npm/npm-virtual/debug/-/debug-2.3.3.tgz#40c453e67e6e13c901ddec317af8986cda9eff8c"
+debug@^2.2.0:
+  version "2.3.1"
+  resolved "https://realglobe.artifactoryonline.com/realglobe/api/npm/npm-virtual/debug/-/debug-2.3.1.tgz#4b206c092eb4e5b090e429a15d1d89083737ab2b"
   dependencies:
     ms "0.7.2"
 
@@ -2887,6 +2893,10 @@ iconv-lite@0.4.13, iconv-lite@~0.4.11, iconv-lite@~0.4.13:
   version "0.4.13"
   resolved "https://realglobe.artifactoryonline.com/realglobe/api/npm/npm-virtual/iconv-lite/-/iconv-lite-0.4.13.tgz#1f88aba4ab0b1508e8312acc39345f36e992e2f2"
 
+iconv-lite@^0.2.11:
+  version "0.2.11"
+  resolved "https://registry.yarnpkg.com/iconv-lite/-/iconv-lite-0.2.11.tgz#1ce60a3a57864a292d1321ff4609ca4bb965adc8"
+
 icss-replace-symbols@^1.0.2:
   version "1.0.2"
   resolved "https://realglobe.artifactoryonline.com/realglobe/api/npm/npm-virtual/icss-replace-symbols/-/icss-replace-symbols-1.0.2.tgz#cb0b6054eb3af6edc9ab1d62d01933e2d4c8bfa5"
@@ -3331,6 +3341,13 @@ koa-convert@^1.2.0:
 koa-is-json@^1.0.0:
   version "1.0.0"
   resolved "https://realglobe.artifactoryonline.com/realglobe/api/npm/npm-virtual/koa-is-json/-/koa-is-json-1.0.0.tgz#273c07edcdcb8df6a2c1ab7d59ee76491451ec14"
+
+koa-proxy@^0.8.0:
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/koa-proxy/-/koa-proxy-0.8.0.tgz#c8e832d27d5ea866ce176252584341853cc37b10"
+  dependencies:
+    co-request "^0.2.0"
+    iconv-lite "^0.2.11"
 
 koa-router@^7.0.1:
   version "7.0.1"
@@ -4882,7 +4899,7 @@ replaceall@^0.1.6:
   version "0.1.6"
   resolved "https://realglobe.artifactoryonline.com/realglobe/api/npm/npm-virtual/replaceall/-/replaceall-0.1.6.tgz#81d81ac7aeb72d7f5c4942adf2697a3220688d8e"
 
-request@2, request@^2.61.0, request@^2.74.0, request@^2.75.0, request@^2.79.0:
+request@*, request@2, request@^2.61.0, request@^2.74.0, request@^2.75.0, request@^2.79.0:
   version "2.79.0"
   resolved "https://realglobe.artifactoryonline.com/realglobe/api/npm/npm-virtual/request/-/request-2.79.0.tgz#4dfe5bf6be8b8cdc37fcf93e04b65577722710de"
   dependencies:
