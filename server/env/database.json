@@ -21,7 +21,6 @@
     "ROOT_USER": "#{process.env.JISSHO3_MYSQL_USER}",
     "ROOT_PASSWORD": "#{process.env.JISSHO3_MYSQL_PASSWORD}",
     "PORT": #{process.env.JISSHO3_MYSQL_PORT},
-    "HOST": "#{process.env.JISSHO3_MYSQL_HOST}",
-    "PROTOCOL": "tcp"
+    "HOST": "#{process.env.JISSHO3_MYSQL_HOST}"
   }
 }
