@@ -36,6 +36,4 @@ tmp
 var
 *.rdb
 
-server/public/js
-server/public/css
 server/public/uploaded
