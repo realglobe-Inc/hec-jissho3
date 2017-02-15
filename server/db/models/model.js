@@ -9,7 +9,6 @@ function Model (name, attributes) {
   let sequelize = new Sequelize(CONFIG.DATABASE, CONFIG.ROOT_USER, CONFIG.ROOT_PASSWORD, {
     host: CONFIG.HOST,
     port: CONFIG.PORT,
-    protocol: CONFIG.PROTOCOL,
     dialect: CONFIG.DIALECT,
     pool: {
       max: 3,
@@ -17,7 +16,6 @@ function Model (name, attributes) {
       idle: 10
     },
     logging: (data) => debug(data),
-    storage: CONFIG.STORAGE
   })
 
   let model = sequelize.define(name, attributes, {
