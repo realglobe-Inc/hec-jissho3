@@ -10,7 +10,11 @@ function Model (name, attributes) {
     host: CONFIG.HOST,
     port: CONFIG.PORT,
     dialect: CONFIG.DIALECT,
-    pool: false,
+    pool: {
+      maxConnections: 5,
+      minConnections: 0,
+      maxIdleTime: 1000
+    },
     logging: (data) => debug(data),
   })
 
