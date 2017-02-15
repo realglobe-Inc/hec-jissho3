@@ -20,16 +20,11 @@ co(function * () {
   // Make simbolic link of this project at node_modules/@self
   let selfPath = 'node_modules/@self'
   yield mkdirpAsync(selfPath)
-  let dirs = [
-    'server',
-    'ui'
-  ]
   let cwd = join(__dirname, '..')
-  for (let dir of dirs) {
-    // Only heroku
-    yield execAsync(`rm node_modules/@self/* || true`, { cwd })
-    yield execAsync(`ln -s ../../${dir} ${selfPath}/`, { cwd })
-  }
+  // Only heroku
+  // This is a very bad practice!!!
+  yield execAsync(`cp -r server node_modules/@self/`, { cwd })
+  yield execAsync(`cp -r ui node_modules/@self/`, { cwd })
 
   // externals
   yield execAsync('./ci/externals.sh')
