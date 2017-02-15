@@ -7,7 +7,7 @@
     "dev": "./bin/dev.js",
     "compile": "webpack --config webpack.config.production.js",
     "test": "karma start && mocha test/server",
-    "prepublish": "./ci/setup.js && npm run compile",
+    "prepublish": "./ci/setup.js",
     "heroku-postbuild": "./ci/db/db_sync.js && ./ci/db/db_seed.js"
   },
   "repository": "realglobe-Inc/hec-jissho3",
