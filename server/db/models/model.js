@@ -12,9 +12,9 @@ function Model (name, attributes) {
     protocol: CONFIG.PROTOCOL,
     dialect: CONFIG.DIALECT,
     pool: {
-      max: 5,
+      max: 3,
       min: 0,
-      idle: 100
+      idle: 10
     },
     logging: (data) => debug(data),
     storage: CONFIG.STORAGE
