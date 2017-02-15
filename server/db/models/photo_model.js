@@ -11,7 +11,7 @@ const Photo = Model('photo', {
   },
   /* Additional information */
   info: {
-    type: Sequelize.JSON,
+    type: Sequelize.STRING,
     allowNull: true
   },
   /* Alt attribute */

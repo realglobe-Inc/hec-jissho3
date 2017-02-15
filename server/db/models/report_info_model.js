@@ -26,7 +26,7 @@ const ReportInfo = Model('report_info', {
   },
   /* 付加情報 */
   info: {
-    type: Sequelize.JSON
+    type: Sequelize.STRING
   }
 })
 
