@@ -27,7 +27,8 @@ co(function * () {
   let existing = yield readdirAsync(selfPath)
   for (let dir of dirs) {
     if (!existing.includes(dir)) {
-      yield execAsync(`ln -s $PWD/${dir} $PWD/${selfPath}/`, { cwd: join(__dirname, '..') })
+      // Only heroku
+      yield execAsync(`ln -s /app/${dir} /app/${selfPath}/`)
     }
   }
 
